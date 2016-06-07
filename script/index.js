@@ -42,7 +42,7 @@
 
 		  	$('#currentTime').text(formate_time(currentTime));
 		  	$('#allTime').text("/" + formate_time(vedioTime));
-		  	console.log(Media.duration);
+		  	/*console.log(Media.duration);*/
 
 		  	if(j_preocess_width == j_process_all.width()){  
 			    window.clearInterval(bartimer);  
@@ -81,29 +81,28 @@
 	        t = _h ? _h + ":" + _m + ":" + _s : _m + ":" + _s
 		  }
 
-		  function w(e) {
-
+		  function moveStart(e) {
 		  }
-		  function g(e) {
-		  	var s = $('div.vedio-process');
+		  function moveIng(e) {
+		  	var process = $('div.vedio-process');
 		  	l;
-	        var t = e.touches[0].pageX, 
-	        	a = $(".vedio-process-dot");
-	        -5 > t ? t = -5 : t > s.width() - a.width() + 12 && (t = s.width() - a.width() + 12),
-	        l = t;
-	        var i = parseInt(Media.duration), 
-	            r = i * t / parseInt($('div.vedio-process').width());
-	        $("#currentTime").text(formate_time(r));
-	        v(t);
+	        var X = e.touches[0].pageX, 
+	        	treasure = $(".vedio-process-dot");
+	        -5 > X ? X = -5 : X > process.width() - treasure.width() + 12 && (X = process.width() - treasure.width() + 12),
+	        l = X;
+	        var duration = parseInt(Media.duration), 
+	            time = duration * X / parseInt($('div.vedio-process').width());
+	        $("#currentTime").text(formate_time(time));
+	        v(X);
 		  }
-		  function b(e) {
-		  	var t = parseInt(Media.duration), 
-		  		a = t * l / parseInt($('div.vedio-process').width());
-		  	Media.currentTime  = a;
+		  function moveEnd(e) {
+		  	var duration = parseInt(Media.duration), 
+		  		currentTime = duration * l / parseInt($('div.vedio-process').width());
+		  	Media.currentTime  = currentTime;
 		  }
-	  	document.querySelector(".vedio-process-dot").addEventListener("touchstart", w),
-        document.querySelector(".vedio-process-dot").addEventListener("touchmove", g),
-        document.querySelector(".vedio-process-dot").addEventListener("touchend", b);
+	  	document.querySelector(".vedio-process-dot").addEventListener("touchstart", moveStart),
+        document.querySelector(".vedio-process-dot").addEventListener("touchmove", moveIng),
+        document.querySelector(".vedio-process-dot").addEventListener("touchend", moveEnd);
 		  
 })();
 
